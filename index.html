@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Conference 2025 - T-Shirt Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+   * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0c0c0c, #015461);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+  }
+
+  .form-wrapper {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    width: 100%;
+    max-width: 750px;
+    color: #fff;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    font-size: 28px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    background: rgba(248, 248, 248, 0.829);
+    color: #0c0b0b;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+
+  input:focus, select:focus {
+    background: white;
+    border: 1px solid #00eaff;
+  }
+
+  select option {
+    color: #000;
+  }
+
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #00eaff;
+    color: #000;
+    font-weight: 600;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  button:hover {
+    background: #00c9d9;
+  }
+
+  @media (max-width: 600px) {
+    .form-wrapper {
+      padding: 25px;
+    }
+    h2 {
+      font-size: 22px;
+    }
+  }
+  </style>
+</head>
+<body>
+  <div class="form-wrapper">
+    <img src="https://i.postimg.cc/C5GWsKzM/logo.jpg" alt="Logo" style="width: 100%; max-width: 200px; margin: 0 auto; display: block;" />
+    <h2>SEKONDI-TAKORADI CATHOLIC DIOCESAN YOUTH CHOIRS CONFERENCE 2025</h2>
+    <h4>CONFERENCE THEME:</h4>
+    <p style="color: rgb(0, 255, 200);">"Music as Prayer, Journeying with Faith as Pilgrims of Hope"</p>
+    <form>
+      <div class="form-group">
+        <label>Full Name:</label>
+        <input type="text" name="fullName" required />
+      </div>
+
+      <div class="form-group">
+        <label>Contact Number:</label>
+        <input type="tel" name="contactNumber" required />
+      </div>
+
+      <div class="form-group">
+        <label>WhatsApp Number:</label>
+        <input type="tel" name="whatsappNumber" />
+      </div>
+
+      <!-- Parish/Station Selection -->
+<div class="form-group">
+    <label>Parish/Station:</label>
+    <select name="parish" id="station" onchange="Station()" required>
+      <option value="">-- Select --</option>
+      <option>Adiembra</option>
+      <option>Asorko</option>
+      <option>Aiyinase</option>
+      <option>Axim</option>
+      <option>Bepo</option>
+      <option>Bogoso</option>
+      <option>Bokazo</option>
+      <option>Brenuakyim</option>
+      <option>Brahabebome</option>
+      <option>Essikado</option>
+      <option>Kansaworodo</option>
+      <option>Ketan</option>
+      <option>Kojokrom</option>
+      <option>Kwesimintsim</option>
+      <option>New Takoradi</option>
+      <option>Nkroful</option>
+      <option>Nsuta</option>
+      <option>Sekondi</option>
+      <option>Shama</option>
+      <option>Shama-Junction</option>
+      <option>Tarkwa</option>
+      <option>Takoradi</option>
+      <option>Tamso</option>
+      <option value="Other">Other</option> <!-- Fix value -->
+    </select>
+  </div>
+  
+  <!-- Hidden input for specifying other parish -->
+  <div class="form-group" id="parish" style="display: none;">
+    <label>If Other, please specify:</label>
+    <input type="text" name="otherParish" />
+  </div>
+
+  
+  
+      <div class="form-group">
+        <label>Your Voice Part:</label>
+        <select name="voicePart" required>
+          <option value="">-- Select --</option>
+          <option>Soprano</option>
+          <option>Alto</option>
+          <option>Tenor</option>
+          <option>Bass</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Your Role:</label>
+        <select name="role" required>
+          <option value="">-- Select --</option>
+          <option>Choir President</option>
+          <option>Choir Director</option>
+          <option>Organist</option>
+          <option>Other Executive</option>
+          <option>Singer</option>
+        </select>
+      </div>
+
+      <!-- Do you have Diocesan Lacoste -->
+<div class="form-group">
+    <label>Do you have Diocesan Lacoste?</label>
+    <select name="hasLacoste" id="hasLacoste" onchange="toggleLacosteFields()" required>
+      <option value="">-- Select --</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+  </div>
+  
+  <!-- If NO, do you need one? -->
+  <div class="form-group" id="needLacosteField">
+    <label>If NO, do you need one (70 Ghs)?</label>
+    <select name="needLacoste">
+      <option value="">-- Select --</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+  </div>
+  
+  <!-- Lacoste Size -->
+  <div class="form-group" id="lacosteSizeField">
+    <label>Lacoste Size:</label>
+    <select name="lacosteSize">
+      <option value="">-- Select --</option>
+      <option>XS</option>
+      <option>S</option>
+      <option>M</option>
+      <option>L</option>
+      <option>XL</option>
+      <option>XXL</option>
+    </select>
+  </div>
+  
+      <button type="submit">Submit Registration</button>
+    </form>
+  </div>
+  <script>
+    function Station() {
+      var station = document.getElementById("station");
+      var parish = document.getElementById("parish");
+      if (station.value === "Other") {
+        parish.style.display = "block";
+      } else {
+        parish.style.display = "none";
+      }
+    }
+    var DiocesanLacoste = document.querySelector('select[name="hasLacoste"]');
+    if (DiocesanLacoste.value === "yes") {
+      NeedLacoste.style.display = "block";
+    } else {
+      NeedLacoste.style.display = "none";
+    }
+
+    DiocesanLacoste.addEventListener("change", function() {
+      if (this.value === "yes") {
+        NeedLacoste.style.display = "block";
+      } else {
+        NeedLacoste.style.display = "none";
+      }
+    });
+  
+  function toggleLacosteFields() {
+    const hasLacoste = document.getElementById('hasLacoste').value;
+    const needLacosteField = document.getElementById('needLacosteField');
+    const lacosteSizeField = document.getElementById('lacosteSizeField');
+
+    if (hasLacoste === 'Yes') {
+      needLacosteField.style.display = 'none';
+      lacosteSizeField.style.display = 'none';
+    } else {
+      needLacosteField.style.display = 'block';
+      lacosteSizeField.style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>
