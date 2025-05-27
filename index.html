@@ -297,7 +297,7 @@ function validateForm() {
     const lacosteSize = document.querySelector('select[name="lacosteSize"]').value;
 
     if (hasLacoste === 'No' && needLacoste === 'Yes' && lacosteSize) {
-      return 7100; // 122 GHS in kobo
+      return 7100; // 71 GHS in kobo
     }
     return 0; // No fee if conditions are not met
   }
@@ -311,7 +311,8 @@ function validateForm() {
 
     var handler = PaystackPop.setup({
       key: 'pk_test_a4fcf9aa5fda1c8c72fa65006ffa2b93ac65dd74', // Replace with your public key
-      email: document.querySelector('input[name="fullName"]').value + '@diocesanyouth.com', // Use a placeholder email
+      email: document.querySelector('input[name="fullName"]').value.replace(/\s+/g, '') + '@diocesanyouth.com',
+
       amount: amount, // Total amount in kobo
       currency: 'GHS',
       ref: 'DIOCYOUTH-' + Math.floor(Math.random() * 1000000), // Generate a random reference
