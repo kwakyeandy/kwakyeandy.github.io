@@ -195,7 +195,7 @@
   
   <!-- If NO, do you need one? -->
   <div class="form-group" id="needLacosteField">
-    <label>If NO, do you need one (70 Ghs)?</label>
+    <label style="color: rgb(60, 255, 0);">If NO, do you need one (70 Ghs)?</label>
     <select name="needLacoste">
       <option value="">-- Select --</option>
       <option>Yes</option>
@@ -217,9 +217,11 @@
     </select>
   </div>
   
-      <button type="submit">Submit Registration</button>
+  <button type="button" onclick="payWithPaystack()">Pay Now</button>
     </form>
   </div>
+  <script src="https://js.paystack.co/v1/inline.js"></script>
+
   <script>
     function Station() {
       var station = document.getElementById("station");
@@ -258,6 +260,71 @@
       lacosteSizeField.style.display = 'block';
     }
   }
+ function payWithPaystack() {
+    var handler = PaystackPop.setup({
+      key: 'pk_test_a4fcf9aa5fda1c8c72fa65006ffa2b93ac65dd74', // Replace with your public key
+      email: document.querySelector('input[name="fullName"]').value + '@diocesanyouth.com', // Use a placeholder email
+      amount: 5050, // Amount in kobo (70 GHS)
+      currency: 'GHS',
+      ref: 'DIOCYOUTH-' + Math.floor(Math.random() * 1000000), // Generate a random reference
+      callback: function(response) {
+        alert('Payment successful! Reference: ' + response.reference);
+        // Here you can handle the successful payment, e.g., save to database
+      },
+      onClose: function() {
+        alert('Payment window closed.');
+      }
+    });
+    handler.openIframe();
+ }
+function validateForm() {
+    const fullName = document.querySelector('input[name="fullName"]').value;
+    const contactNumber = document.querySelector('input[name="contactNumber"]').value;
+    const whatsappNumber = document.querySelector('input[name="whatsappNumber"]').value;
+    const parish = document.querySelector('select[name="parish"]').value;
+    const voicePart = document.querySelector('select[name="voicePart"]').value;
+    const role = document.querySelector('select[name="role"]').value;
+
+    if (!fullName || !contactNumber || !parish || !voicePart || !role) {
+      alert("Please fill in all required fields.");
+      return false;
+    }
+    return true;
+  }
+  function getLacosteFee() {
+    const hasLacoste = document.querySelector('select[name="hasLacoste"]').value;
+    const needLacoste = document.querySelector('select[name="needLacoste"]').value;
+    const lacosteSize = document.querySelector('select[name="lacosteSize"]').value;
+
+    if (hasLacoste === 'No' && needLacoste === 'Yes' && lacosteSize) {
+      return 7100; // 122 GHS in kobo
+    }
+    return 0; // No fee if conditions are not met
+  }
+   function payWithPaystack() {
+    if (!validateForm()) {
+      return; // Stop if form validation fails
+    }
+
+    const lacosteFee = getLacosteFee();
+    const amount = 5050 + lacosteFee; // Base fee + Lacoste fee in kobo
+
+    var handler = PaystackPop.setup({
+      key: 'pk_test_a4fcf9aa5fda1c8c72fa65006ffa2b93ac65dd74', // Replace with your public key
+      email: document.querySelector('input[name="fullName"]').value + '@diocesanyouth.com', // Use a placeholder email
+      amount: amount, // Total amount in kobo
+      currency: 'GHS',
+      ref: 'DIOCYOUTH-' + Math.floor(Math.random() * 1000000), // Generate a random reference
+      callback: function(response) {
+        alert('Payment successful! Reference: ' + response.reference);
+        // Here you can handle the successful payment, e.g., save to database
+      },
+      onClose: function() {
+        alert('Payment window closed.');
+      }
+    });
+    handler.openIframe();
+   }
 </script>
 </body>
 </html>
